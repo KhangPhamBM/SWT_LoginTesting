@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mGF31fJxgkwkqy3wevqHBGbRQtslMxYWrDQOLN0u/KP6/mDiMimxyNPlMFjhq+cSm3m7opXjc+UYyWevTkIIYg==",
+  "dgSpecHash": "GAPR6FJjzg2vs36db2s13d8WfIIVQhoSLtybzPLvM6a7UUpTg2VmMQifzYkdpk2RH9BWwJJfPifCwA7FOD7VIA==",
   "success": true,
-  "projectFilePath": "E:\\PE_PRN211_SU23_TrialTest\\Here for PE\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
+  "projectFilePath": "E:\\Programming Study\\Chuyen nganh 5\\SWT301\\Workspace\\SWT_LoginTesting\\SWT_LoginTesting\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PHAMKHANG\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
     "C:\\Users\\PHAMKHANG\\.nuget\\packages\\microsoft.codecoverage\\17.5.0\\microsoft.codecoverage.17.5.0.nupkg.sha512",

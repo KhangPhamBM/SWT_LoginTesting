@@ -1,21 +1,23 @@
 using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumTests
 {
     [TestFixture]
-    public class LoginEmptyPassword
+    public class LoginWrongPass
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
-
+        
         [SetUp]
         public void SetupTest()
         {
@@ -23,7 +25,7 @@ namespace SeleniumTests
             baseURL = "https://www.google.com/";
             verificationErrors = new StringBuilder();
         }
-
+        
         [TearDown]
         public void TeardownTest()
         {
@@ -37,22 +39,22 @@ namespace SeleniumTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-
-        [TestCaseSource(nameof(LoginTestEmptyPasswordData))]
-        public void TheLoginEmptyPasswordTest(string phoneNumber, string password, string expected)
+        
+        [Test]
+        public void TheLoginWrongPassTest()
         {
             driver.Navigate().GoToUrl("https://yoga-center-website.vercel.app/login");
             driver.FindElement(By.Id("phoneNumber")).Click();
             driver.FindElement(By.Id("phoneNumber")).Clear();
-            driver.FindElement(By.Id("phoneNumber")).SendKeys(phoneNumber);
+            driver.FindElement(By.Id("phoneNumber")).SendKeys("0912356782");
+            driver.FindElement(By.XPath("//div[@id='root']/div/div/main/div/div/div/div[2]/form/div[2]/div/div/div/div/div/span")).Click();
             driver.FindElement(By.Id("password")).Click();
-            driver.FindElement(By.Id("password")).Clear(); // Clear the password field
-            driver.FindElement(By.Id("password")).SendKeys(password); // Enter an empty password
-            driver.FindElement(By.XPath("//button[@type='submit']")).Click(); // Use a more specific locator for the login button
-            Thread.Sleep(1000); // Add a small delay to allow time for error validation
-            Assert.AreEqual(expected, driver.FindElement(By.CssSelector("div.ant-form-item-explain-error")).Text);
+            driver.FindElement(By.Id("password")).Clear();
+            driver.FindElement(By.Id("password")).SendKeys("123455");
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            Thread.Sleep(2000);
+            Assert.AreEqual("Failed To Log In", driver.FindElement(By.Id("swal2-title")).Text);
         }
-
         private bool IsElementPresent(By by)
         {
             try
@@ -65,7 +67,7 @@ namespace SeleniumTests
                 return false;
             }
         }
-
+        
         private bool IsAlertPresent()
         {
             try
@@ -78,42 +80,40 @@ namespace SeleniumTests
                 return false;
             }
         }
-
-        private string CloseAlertAndGetItsText()
-        {
-            try
-            {
+        
+        private string CloseAlertAndGetItsText() {
+            try {
                 IAlert alert = driver.SwitchTo().Alert();
                 string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
+                if (acceptNextAlert) {
                     alert.Accept();
-                }
-                else
-                {
+                } else {
                     alert.Dismiss();
                 }
                 return alertText;
-            }
-            finally
-            {
+            } finally {
                 acceptNextAlert = true;
             }
         }
 
-        public static IEnumerable<TestCaseData> LoginTestEmptyPasswordData()
+        public static IEnumerable<TestCaseData> LoginTestLoginTestWrongPasswordData()
         {
             List<TestCaseData> testCases = new List<TestCaseData>();
-            testCases.Add(new TestCaseData("0366967957", "", "Password cannot be blank"));
-            testCases.Add(new TestCaseData("0366967958", "", "Password cannot be blank"));
-            testCases.Add(new TestCaseData("", "", "Phone cannot be blank"));
+            testCases.Add(new TestCaseData("0912356782", "123455", "Failed To Log In"));
+            testCases.Add(new TestCaseData("0912345678", "123446", "Failed To Log In"));
+            /*  testCases.Add(new TestCaseData("0912345678", "111111", true));
+              testCases.Add(new TestCaseData("0912345679", "222222", true));
+              testCases.Add(new TestCaseData("0912345680", "12341234", true));
+              testCases.Add(new TestCaseData("0912345681", "11223344", true));
+              testCases.Add(new TestCaseData("0912345682", "2335555", true));
+              testCases.Add(new TestCaseData("0912345683", "123123123", true));
+              testCases.Add(new TestCaseData("0123456725", "37373737", true));
+            */
 
-          /* testCases.Add(new TestCaseData("0366967957", "", "Password cannot be blank"));
-             testCases.Add(new TestCaseData("0366967958", "", "Password cannot be blank"));
-             testCases.Add(new TestCaseData("0366967958", "", "Password cannot be blank"));*/
             // Add more test cases as needed
 
             return testCases;
         }
+
     }
 }

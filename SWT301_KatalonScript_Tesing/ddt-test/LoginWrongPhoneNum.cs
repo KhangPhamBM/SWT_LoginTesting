@@ -11,13 +11,13 @@ using OpenQA.Selenium.Support.UI;
 namespace SeleniumTests
 {
     [TestFixture]
-    public class LoginSuccess
+    public class LoginWrongPhoneNum
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
-        
+
         [SetUp]
         public void SetupTest()
         {
@@ -25,7 +25,7 @@ namespace SeleniumTests
             baseURL = "https://www.google.com/";
             verificationErrors = new StringBuilder();
         }
-        
+
         [TearDown]
         public void TeardownTest()
         {
@@ -39,22 +39,20 @@ namespace SeleniumTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-        
-        [TestCaseSource(nameof(LoginTestLoginTestSuccessfulLoginData))]
-        public void TheLoginSuccessTest(string phoneNumber, string password, string expected)
+
+        [TestCaseSource(nameof(LoginTestLoginTestWrongNumData))]
+        public void TheLoginWrongNumberTest(string phoneNumber, string password, string expected)
         {
             driver.Navigate().GoToUrl("https://yoga-center-website.vercel.app/login");
             driver.FindElement(By.Id("phoneNumber")).Click();
             driver.FindElement(By.Id("phoneNumber")).Clear();
             driver.FindElement(By.Id("phoneNumber")).SendKeys(phoneNumber);
+            driver.FindElement(By.XPath("//div[@id='root']/div/div/main/div/div/div/div[2]/form/div[2]/div/div/div/div/div/span")).Click();
             driver.FindElement(By.Id("password")).Click();
             driver.FindElement(By.Id("password")).Clear();
             driver.FindElement(By.Id("password")).SendKeys(password);
-            driver.FindElement(By.XPath("//div[@id='root']/div/div/main/div/div/div/div[2]/form/div[2]/div/div/div/div/div/span")).Click();
-            driver.FindElement(By.Id("password")).Click();
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
-            Assert.AreEqual("Loading...", driver.FindElement(By.Id("swal2-title")).Text);
-            Thread.Sleep(1500);
+            Thread.Sleep(2000);
             Assert.AreEqual(expected, driver.FindElement(By.Id("swal2-title")).Text);
         }
         private bool IsElementPresent(By by)
@@ -69,7 +67,7 @@ namespace SeleniumTests
                 return false;
             }
         }
-        
+
         private bool IsAlertPresent()
         {
             try
@@ -82,7 +80,7 @@ namespace SeleniumTests
                 return false;
             }
         }
-        
+
         private string CloseAlertAndGetItsText() {
             try {
                 IAlert alert = driver.SwitchTo().Alert();
@@ -98,23 +96,26 @@ namespace SeleniumTests
             }
         }
 
-        public static IEnumerable<TestCaseData> LoginTestLoginTestSuccessfulLoginData()
+        public static IEnumerable<TestCaseData> LoginTestLoginTestWrongNumData()
         {
             List<TestCaseData> testCases = new List<TestCaseData>();
-            testCases.Add(new TestCaseData("0912356782", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0912345682", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0912345679", "123456", "Log In Successfully"));
-            /*testCases.Add(new TestCaseData("0912345680", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0912345681", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0912345682", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0912345683", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0123456725", "123456", "Log In Successfully"));
-            testCases.Add(new TestCaseData("0123456731", "123456", "Log In Successfully"));
+            testCases.Add(new TestCaseData("0912456785", "123456", "Failed To Log In"));
+            testCases.Add(new TestCaseData("0222356799", "123456", "Failed To Log In"));
+            testCases.Add(new TestCaseData("0912345671", "123456", "Failed To Log In"));
+            /* testCases.Add(new TestCaseData("0912785670", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0712345682", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0917041181", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0910375682", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0912544583", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0126482025", "123456", "Failed To Log In"));
+             testCases.Add(new TestCaseData("0120455731", "123456", "Failed To Log In"));
             */
 
             // Add more test cases as needed
 
             return testCases;
         }
+
+
     }
 }

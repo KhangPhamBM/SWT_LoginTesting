@@ -1033,11 +1033,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\PE_PRN211_SU23_TrialTest\\Here for PE\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
+      "projectUniqueName": "E:\\Programming Study\\Chuyen nganh 5\\SWT301\\Workspace\\SWT_LoginTesting\\SWT_LoginTesting\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
       "projectName": "SWT301_KatalonScript_Tesing",
-      "projectPath": "E:\\PE_PRN211_SU23_TrialTest\\Here for PE\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
+      "projectPath": "E:\\Programming Study\\Chuyen nganh 5\\SWT301\\Workspace\\SWT_LoginTesting\\SWT_LoginTesting\\SWT301_KatalonScript_Tesing\\SWT301_KatalonScript_Tesing.csproj",
       "packagesPath": "C:\\Users\\PHAMKHANG\\.nuget\\packages\\",
-      "outputPath": "E:\\PE_PRN211_SU23_TrialTest\\Here for PE\\SWT301_KatalonScript_Tesing\\obj\\",
+      "outputPath": "E:\\Programming Study\\Chuyen nganh 5\\SWT301\\Workspace\\SWT_LoginTesting\\SWT_LoginTesting\\SWT301_KatalonScript_Tesing\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PHAMKHANG\\AppData\\Roaming\\NuGet\\NuGet.Config",
